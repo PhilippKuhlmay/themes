@@ -12,18 +12,19 @@ if (!defined('TYPO3_MODE')) {
 
 if (TYPO3_MODE === 'BE') {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'KayStrobach.'.'Themes', 'web', // Main area
-        'mod1', // Name of the module
+        'Themes',
+        'system', // Main area
+        'log', // Name of the module
         '', // Position of the module
         [
             // Allowed controller action combinations
-            'Editor' => 'index,update,showTheme,setTheme,showThemeDetails,saveCategoriesFilterSettings',
+            \TYPO3\CMS\Belog\Controller\BackendLogController::class => 'list,deleteMessage',
         ], [
             // Additional configuration
-            'access'         => 'user,group',
-            'icon' => 'EXT:' . 'Themes' . '/ext_icon.svg',
-            'iconIdentifier' => 'module-themes',
-            'labels'         => 'LLL:EXT:'.'Themes'.'/Resources/Private/Language/locallang.xlf',
+            'access' => 'admin',
+            'icon' => 'EXT:belog/Resources/Public/Icons/module-belog.svg',
+            'labels' => 'LLL:EXT:belog/Resources/Private/Language/locallang_mod.xlf',
+            'labels' => 'LLL:EXT:belog/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
     // Add some backend stylesheets and javascript
