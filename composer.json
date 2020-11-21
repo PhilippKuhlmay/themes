@@ -6,8 +6,8 @@
   "license": ["GPL-2.0+"],
   "keywords": ["TYPO3 CMS", "TYPO3 THEMES", "THEMES", "THEMES", "FLUID", "CUSTOMIZE"],
   "require": {
-    "typo3/cms-core": ">=9.5.7|<9.6",
-    "gridelementsteam/gridelements": ">=9.2.1,<9.9",
+    "typo3/cms-core": "^10.4",
+    "gridelementsteam/gridelements": "^10.0.0",
     "ext-json": "*",
     "ext-pdo": "*"
   },

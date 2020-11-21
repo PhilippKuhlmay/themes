@@ -7,23 +7,24 @@ if (!defined('TYPO3_MODE')) {
 /**
  * Static templates
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Themes');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/FluidStyledContent', 'Themes (For backward compatibility: Additional add this for using fluid_styled_content)');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('Themes', 'Configuration/TypoScript', 'Themes');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('Themes', 'Configuration/TypoScript/FluidStyledContent', 'Themes (For backward compatibility: Additional add this for using fluid_styled_content)');
 
 if (TYPO3_MODE === 'BE') {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'KayStrobach.'.$_EXTKEY, 'web', // Main area
-        'mod1', // Name of the module
+        'Themes',
+        'system', // Main area
+        'log', // Name of the module
         '', // Position of the module
         [
             // Allowed controller action combinations
-            'Editor' => 'index,update,showTheme,setTheme,showThemeDetails,saveCategoriesFilterSettings',
+            \TYPO3\CMS\Belog\Controller\BackendLogController::class => 'list,deleteMessage',
         ], [
             // Additional configuration
-            'access'         => 'user,group',
-            'icon' => 'EXT:' . $_EXTKEY . '/ext_icon.svg',
-            'iconIdentifier' => 'module-themes',
-            'labels'         => 'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf',
+            'access' => 'admin',
+            'icon' => 'EXT:belog/Resources/Public/Icons/module-belog.svg',
+            'labels' => 'LLL:EXT:belog/Resources/Private/Language/locallang_mod.xlf',
+            'labels' => 'LLL:EXT:belog/Resources/Private/Language/locallang_mod.xlf',
         ]
     );
     // Add some backend stylesheets and javascript
@@ -56,7 +57,7 @@ $iconsSvg = [
 $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
 foreach ($iconsSvg as $identifier => $path) {
     $iconRegistry->registerIcon(
-        $identifier, \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class, ['source' => 'EXT:' . $_EXTKEY . '/' . $path]
+        $identifier, \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class, ['source' => 'EXT:' . 'Themes' . '/' . $path]
     );
 }
 
